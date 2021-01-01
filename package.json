@@ -25,5 +25,8 @@
     "test:build": "yarn build --noEmit",
     "test:jest": "yarn jest --detectOpenHandles --forceExit",
     "test:lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@google-cloud/logging": "^9.0.0"
   }
 }
