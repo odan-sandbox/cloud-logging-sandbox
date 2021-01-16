@@ -1,19 +1,27 @@
 import express from "express";
-import winston from "winston";
 import expressWinston from "express-winston";
-
-const winstonInstance = winston.createLogger({
-  format: winston.format.combine(winston.format.prettyPrint()),
-  transports: [new winston.transports.Console()],
-});
+import winston from "winston";
+import { LoggingWinston } from "@google-cloud/logging-winston";
 
 const app = express();
 
-app.use(express.json());
+const projectId = "cloud-logging-sandbox";
+const winstonInstance = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+    new LoggingWinston({ projectId }),
+  ],
+});
 app.use(expressWinston.logger({ winstonInstance }));
+
+app.use(express.json());
 
 app.get("/", (_, res) => {
   res.send({ hello: true });
+});
+
+app.get("/error", () => {
+  throw new Error("poyo");
 });
 
 async function main(): Promise<void> {

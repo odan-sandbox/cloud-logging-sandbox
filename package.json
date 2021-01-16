@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@google-cloud/logging": "^9.0.0",
+    "@google-cloud/logging-winston": "^4.0.2",
     "express": "^4.17.1",
     "express-winston": "^4.0.5",
     "winston": "^3.3.3"
